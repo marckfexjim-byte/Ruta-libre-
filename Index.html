@@ -252,7 +252,32 @@ function renderCaminos() {
       '<div class="kam-time">🕐 ' + k.circulacion + '</div>';
     list.appendChild(card);
   });
+}function renderFuentes() {
+  var list = document.getElementById("fuentesList");
+  list.innerHTML = "";
+  FUENTES_OFICIALES.forEach(function (f) {
+    var a = el("a", { class: "source-link", href: f.url, target: "_blank", rel: "noopener noreferrer" });
+    a.innerHTML = '<span>' + f.nombre + '</span><span>↗</span>';
+    list.appendChild(a);
+  });
 }
+
+renderNav();
+renderSignal();
+renderCiudades();
+renderCaminos();
+renderTemporadas();
+renderFuentes();
+setTab("inicio");
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", function () {
+    navigator.serviceWorker.register("./sw.js").catch(function () {});
+  });
+}
+</script>
+</body>
+</html>
 function renderTemporadas() {
   var list = document.getElementById("temporadasList");
   list.innerHTML = "";
